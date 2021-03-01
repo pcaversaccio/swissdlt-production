@@ -26,14 +26,14 @@ geth --datadir node-prod/ account new
 
 ``` 
 
-send the address that is created to BCTS 
+Send the address that is created to BCTS (toni.caradonna@bcts.ch)
 
 ```
 geth --datadir node-prod/ init swissdlt.json
 chmod +x start-node.sh
 ```
 
-start up a node that runs with a rpc on http://localhost:8550
+start up a node that runs with a RPC on http://localhost:8550
 
 ```./start-node.sh```
 
@@ -41,7 +41,7 @@ start up a node that runs with a rpc on http://localhost:8550
 # How to Install a Validating Node
 *********************************
 
-like above but after creating the address:
+Like above but after creating the address:
 
 send the address that is created to BCTS 
 
@@ -75,7 +75,7 @@ add these two lines and save
 ```
 
 *****************************
-# Java console
+# Java Console
 *********************************
 
 `geth attach node-prod/geth.ipc`
@@ -83,7 +83,7 @@ add these two lines and save
 for a full list of commands check https://geth.ethereum.org/docs/rpc/server
 
 *****************************
-# accounts
+# Accounts
 *********************************
 
 please backup up your pwd for your wallet, also backup the file: ~/swissdlt/node-prod/keystore/UTC-.........json you will need that to restore access to the validator, also think about intercompany access policy.
