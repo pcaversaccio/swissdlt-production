@@ -1,7 +1,7 @@
-# swissdlt_staging
+# Swiss DLT Staging / Production
 
 *****************************
-# How to install a full node on Ubuntu 20.4
+# How to Install a Full Node on Ubuntu 20.4
 *****************************
 ```
 sudo apt install git
@@ -18,35 +18,36 @@ sudo apt-get update
 
 sudo apt-get install ethereum
 
-git clone https://github.com/BCTSAG/swissdlt_staging
+git clone https://github.com/pcaversaccio/swissdlt-production.git
 
-mv swissdlt_staging swissdlt
+cd swissdlt-production
 
-cd swissdlt
-
-geth --datadir node1/ account new
+geth --datadir node-prod/ account new
 
 ``` 
 
 send the address that is created to BCTS 
 
-```geth --datadir node1/ init swissdlt.json```
+```
+geth --datadir node-prod/ init swissdlt.json
+chmod +x start-node.sh
+```
 
-start up a node that runs with a rpc on http://localhost:8540
+start up a node that runs with a rpc on http://localhost:8550
 
 ```./start-node.sh```
 
 *****************************
-# How to install a validating node
+# How to Install a Validating Node
 *********************************
 
 like above but after creating the address:
 
 send the address that is created to BCTS 
 
-send the enode-info that is created to BCTC eg using `geth attach node1/geth.ipc` and then `>admin.nodeInfo` and send the output to BCTS
+send the enode-info that is created to BCTC eg using `geth attach node-prod/geth.ipc` and then `>admin.nodeInfo` and send the output to BCTS
 
-BCTS will send out a request to all node validators to add you and add your node-info to `node1/static-node.json` if you do not have a static IP please use ngrok or similar to get a static IP and let us know
+BCTS will send out a request to all node validators to add you and add your node-info to `node-prod/static-node.json` if you do not have a static IP please use ngrok or similar to get a static IP and let us know
 
 wait for confirmation until all validators have added you
 
@@ -54,7 +55,7 @@ add the adress to the `start-validating-node.sh` script
 
 use the password that you created correctly with unlocking either via `geth --unlock <YOUR_ACCOUNT_ADDRESS> --password <YOUR_PASSWORD>` or, and this is **NOT RECOMMENDED**
 
-`screen -S node1 geth --datadir node1/ --syncmode 'full'  --gcmode=archive  --port 30311 --rpc --rpcaddr 'localhost' --rpccorsdomain "*" --rpcport 8540 --rpcapi 'personal,eth,net,web3,txpool,miner'  --networkid 99 --gasprice '1' -unlock 'ACCOUNTADDRESSwithoutTHE_0x' --password node1/passwort.txt --mine --allow-insecure-unlock`
+`screen -S node-prod geth --datadir node-prod/ --syncmode 'full'  --gcmode=archive  --port 30312 --rpc --rpcaddr 'localhost' --rpccorsdomain "*" --rpcport 8550 --rpcapi 'personal,eth,net,web3,txpool,miner'  --networkid 999 --gasprice '1' -unlock 'ACCOUNTADDRESSwithoutTHE_0x' --password node-prod/passwort.txt --mine --allow-insecure-unlock`
 
 you could put this screen command in a startup script eg. `./start-node_validating.sh`
 
@@ -77,7 +78,7 @@ add these two lines and save
 # Java console
 *********************************
 
-`geth attach node1/geth.ipc`
+`geth attach node-prod/geth.ipc`
 
 for a full list of commands check https://geth.ethereum.org/docs/rpc/server
 
@@ -85,4 +86,4 @@ for a full list of commands check https://geth.ethereum.org/docs/rpc/server
 # accounts
 *********************************
 
-please backup up your pwd for your wallet, also backup the file: ~/swissdlt/node1/keystore/UTC-.........json you will need that to restore access to the validator, also think about intercompany access policy.
+please backup up your pwd for your wallet, also backup the file: ~/swissdlt/node-prod/keystore/UTC-.........json you will need that to restore access to the validator, also think about intercompany access policy.
